@@ -1,0 +1,43 @@
+body{
+    background-color: #cccccc;
+}
+
+#filter{
+    width:30%;
+    font-family: cursive;
+    height: 25px;
+    font-size: 90%;
+    margin-top: 10px;
+}
+
+.header{
+    font-family: cursive;
+    height : 50px;
+    margin: 0 20 0 20;
+    padding-top: 30px;
+}
+
+#sections, #sort{
+    font-family: cursive;
+    height: 25px;
+    margin: 10px;
+}
+
+#dropdowns{
+    float: right;
+    margin-right: 10px;
+}
+
+#export{
+    position: fixed;
+    top:0px;
+    right:150px;
+    margin-top: 0px;
+    background-color: black;
+    color: white;
+    width:150px;
+    height: 30px;
+    text-align: center;
+    padding: 3 2 1 2;
+    border-bottom-left-radius: 15px;
+}
