@@ -10,7 +10,7 @@ body{
     margin-top: 10px;
 }
 
-.header{
+#header{
     font-family: cursive;
     height : 50px;
     margin: 0 20 0 20;
@@ -40,4 +40,127 @@ body{
     text-align: center;
     padding: 3 2 1 2;
     border-bottom-left-radius: 15px;
+    cursor: pointer;
+}
+
+#exportOptions{
+    display:none;
+}
+
+#export:hover + #exportOptions{
+    position: fixed;
+    top:30px;
+    right:150px;
+    margin-top: 0px;
+    background-color: black;
+    color: blue;
+    width:150px;
+    height: 50px;
+    text-align: center;
+    display: block;
+}
+
+#exportOptions:hover{
+    position: fixed;
+    top:30px;
+    right:150px;
+    margin-top: 0px;
+    background-color: black;
+    color: blue;
+    width:150px;
+    height: 50px;
+    text-align: center;
+    display: block;
+}
+
+.exportOption{
+    background-color: black;
+    color:blue;
+    margin: 0px;
+    cursor: pointer;
+}
+
+#main{
+    border:solid;
+    border-color: #696969;
+    border-width: 10px;
+    border-radius: 5px;
+    min-height: 300px;
+    width : 90%;
+    margin :20px;
+    background-color: white;
+}
+
+#name, .sectionHeader{
+    text-align: center;
+    font-family: cursive;
+    font-size: larger;
+}
+
+.sectionHeader{
+    margin-top: 0px;
+}
+
+#section-container{
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    padding: 10px;
+    grid-gap: 20px;
+    min-height: 500px;
+}
+.section-item{
+    position: relative;
+    min-height: 50px;
+}
+
+#plusIcon, .fas, .fa-plus-circle{
+    padding: 2px;
+    color: #83bc2d;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: large;
+}
+
+.note-container{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 5px;
+    grid-gap: 5px;
+}
+.note-item{
+    position: relative;
+    min-height: 110px;
+    max-height: 110px;
+    cursor: pointer;
+}
+
+.left{
+    background-color: #c3ee8f;
+}
+
+.mid{
+    background-color: #feff88;
+}
+
+.right{
+    background-color: #eed3ff;
+}
+
+.note{
+    word-break: break-all;
+    font-family: cursive;
+    font-size: smaller;
+    text-align: center;
+    margin: 0px;
+    overflow: hidden;
+    max-height: inherit;
+}
+
+.likesCounter{
+    margin: 2px 6px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    font-size: smaller;
 }

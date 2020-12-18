@@ -2,10 +2,15 @@
     <head>
         <title>CSS Assignment</title>
         <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     </head>
     <body>
-        <div class = "header">
+        <div id = "header">
             <p id="export">Export</p>
+            <div id="exportOptions">
+                <p class="exportOption">PDF</p>
+                <p class="exportOption">Excel</p>
+            </div>
             <input type="text" id="filter" placeholder="🔍start typing to filter stickies">
             <div id="dropdowns">
                 <label for="sections">View Section</label>
@@ -20,6 +25,45 @@
                     <option value="1">Created Time</option>
                     <option value="2">Votes</option>
                 </select>
+            </div>
+        </div>
+        <div id = "main">
+            <p id = "name">Swapnil Sharma</p>
+            <div id="section-Container">
+                <div class="section-item">
+                    <p class = "sectionHeader">Title 1 <button class="plusIcon fas fa-plus-circle"></button></p>
+                    <div class="note-Container">
+                        <div class="note-item left" title="TODO :Update Title when text changes">
+                            <p class="note">Test3jjjnioounTest3jjjnioounTest3jjjnioo</p>
+                        </div>
+                        <div class="note-item left" title="TODO :Update Title when text changes">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="section-item">
+                    <p class = "sectionHeader">Title 2 <button class="plusIcon fas fa-plus-circle"></button></p>
+                    <div class="note-Container">
+                        <div class="note-item mid" title="TODO :Update Title when text changes">
+                            <p class="note">Test3jjjnioounTest3jjjnioounTest3jjjnioo</p>
+                        </div>
+                        <div class="note-item mid" title="TODO :Update Title when text changes">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="section-item">
+                    <p class = "sectionHeader">Title 3 <button class="plusIcon fas fa-plus-circle"></button></p>
+                    <div class="note-Container">
+                        <div class="note-item right" title="TODO :Update Title when text changes">
+                            <p class="note">Test3jjjnioounTest3jjjnioounTest3jjjnioo</p>
+                            <p class="likesCounter">+2</p>
+                        </div>
+                        <div class="note-item right" title="TODO :Update Title when text changes">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
