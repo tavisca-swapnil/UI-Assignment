@@ -135,15 +135,15 @@ body{
     cursor: pointer;
 }
 
-.left{
+.left,.leftOpenNote{
     background-color: #c3ee8f;
 }
 
-.mid{
+.mid,.midOpenNote{
     background-color: #feff88;
 }
 
-.right{
+.right,.rightOpenNote{
     background-color: #eed3ff;
 }
 
