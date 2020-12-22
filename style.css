@@ -75,9 +75,13 @@ body{
 
 .exportOption{
     background-color: black;
-    color:blue;
+    color:#37bbeb;;
     margin: 0px;
     cursor: pointer;
+}
+
+.exportOption:hover{
+    color:blue;
 }
 
 #main{

@@ -4,7 +4,7 @@ window.onload = function(){
     let midNotesCount = 0;
     let rightNotesCount = 0;
     let openNoteId = "";
-    let notes = [{}];
+    let notes = [];
 
     document.getElementById("addLeft").addEventListener("click", function() {addNote("left")});
 
@@ -113,7 +113,7 @@ window.onload = function(){
                 id : openNoteId,
                 likes : 0,
                 content : "",
-                dateCreated : new Date()
+                section : id
             }
             openNoteObject = newNote;
             notes.push(newNote);
@@ -159,6 +159,8 @@ window.onload = function(){
 
         let openNote = document.getElementById(openNoteId);
         openNote.lastElementChild.innerText = "+" + openNoteContentObject.likes;
+
+        sort();
     }
 
     document.getElementById("delete").addEventListener("click", function() {deleteNote()});
@@ -231,5 +233,69 @@ window.onload = function(){
             mid.style.display = "";
             right.style.display = "";
         }
+    }
+
+    document.getElementById("sort").addEventListener("change", function() {sort()});
+
+    function sort()
+    {
+        let sort = document.getElementById("sort").value;
+
+        if(sort == "1")
+        {
+            setSortedNotes(notes);
+        }
+        else if(sort == "2")
+        {
+            let noteObjects = notes.slice();
+            noteObjects.sort(function(a, b) {
+                return b.likes - a.likes;
+            });
+
+            setSortedNotes(noteObjects);
+        }
+    }
+
+    function setSortedNotes(allNotes)
+    {
+        var leftsection = [];
+        var midSection = [];
+        var rightSection = [];
+
+        Array.from(allNotes).forEach(element => {
+            let note = document.getElementById(element.id);
+
+            if(element.section == "leftOpenNote")
+            {
+                leftsection.push(note);
+            }
+            else if(element.section == "midOpenNote")
+            {
+                midSection.push(note);
+            }
+            else if(element.section == "rightOpenNote")
+            {
+                rightSection.push(note);
+            }
+        });
+
+        let leftSide = document.getElementById("leftSection");
+        leftSide.innerHTML = "";
+        let rightSide = document.getElementById("rightSection");
+        rightSide.innerHTML = "";
+        let midSide = document.getElementById("midSection");
+        midSide.innerHTML = "";
+
+        Array.from(leftsection).forEach(item => {
+            leftSide.appendChild(item);
+        });
+
+        Array.from(midSection).forEach(item => {
+            midSide.appendChild(item);
+        });
+
+        Array.from(rightSection).forEach(item => {
+            rightSide.appendChild(item);
+        });
     }
 }
