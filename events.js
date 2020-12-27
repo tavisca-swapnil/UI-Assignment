@@ -14,9 +14,9 @@ window.onload = function(){
 
     function addNote(position)
     {
-        var lastNoteLeft = document.getElementById("leftSection").lastElementChild;
-        var lastNoteMid = document.getElementById("midSection").lastElementChild;
-        var lastNoteRight = document.getElementById("rightSection").lastElementChild;
+        let lastNoteLeft = document.getElementById("leftSection").lastElementChild;
+        let lastNoteMid = document.getElementById("midSection").lastElementChild;
+        let lastNoteRight = document.getElementById("rightSection").lastElementChild;
 
         if(lastNoteLeft!= null && lastNoteLeft.firstChild.innerHTML=="")
         {
@@ -36,12 +36,12 @@ window.onload = function(){
             rightNotesCount--;
         }
 
-        var section = position + "Section";
-        var lastNote = document.getElementById(section).lastElementChild;
+        let section = position + "Section";
+        let lastNote = document.getElementById(section).lastElementChild;
 
         if(lastNote == null || lastNote.firstChild.innerHTML!="")
         {
-            let count = 0;            
+            let count = 0;
             if(position == "left")
             {
                 leftNotesCount++;
@@ -58,15 +58,15 @@ window.onload = function(){
                 count = rightNotesCount;
             }
 
-            var note = document.createElement("DIV");
+            let note = document.createElement("DIV");
             note.className += "note-item ";
             note.className += position;
             note.id = position + "_" + count;
 
-            var content = document.createElement("P");
+            let content = document.createElement("P");
             content.className += "note";
 
-            var likes = document.createElement("P");
+            let likes = document.createElement("P");
             likes.className += "likesCounter ";
             likes.innerText = "+0";
 
@@ -78,7 +78,7 @@ window.onload = function(){
 
     }
 
-    document.addEventListener("click", function(event) 
+    document.addEventListener("click", function(event)
         {
             if (hasClass(event.target, 'left')) {
                 openNote(event, "leftOpenNote");
@@ -208,7 +208,7 @@ window.onload = function(){
         let left = document.getElementById("leftSection");
         let mid = document.getElementById("midSection");
         let right = document.getElementById("rightSection");
-        
+
         if(input == "1")
         {
             left.style.display = "";
@@ -258,9 +258,9 @@ window.onload = function(){
 
     function setSortedNotes(allNotes)
     {
-        var leftsection = [];
-        var midSection = [];
-        var rightSection = [];
+        let leftsection = [];
+        let midSection = [];
+        let rightSection = [];
 
         Array.from(allNotes).forEach(element => {
             let note = document.getElementById(element.id);
@@ -297,5 +297,157 @@ window.onload = function(){
         Array.from(rightSection).forEach(item => {
             rightSide.appendChild(item);
         });
+    }
+
+    document.getElementById("pdf").addEventListener('click', function(event) {Export(event)});
+
+    document.getElementById("excel").addEventListener('click', function(event) {Export(event)});
+
+    function Export(event)
+    {
+        let id = event.target.id;
+        let table = document.createElement("table");
+
+        table.style.width = '100%';
+        table.setAttribute('border', '3');
+        table.style.borderCollapse = 'collapse';
+        table.style.textAlign = 'center';
+
+        let tableMid = table.cloneNode(true);
+        let tableRight = table.cloneNode(true);
+
+        let left = [];
+        let mid = [];
+        let right = [];
+
+        let row1 = document.createElement("TR");
+
+        let titleCell1 = document.createElement("TH");
+        let heading1 = document.createTextNode("Section1");
+        titleCell1.appendChild(heading1);
+        row1.appendChild(titleCell1);
+
+        let titleCell2 = document.createElement("TH");
+        let heading2 = document.createTextNode("Likes");
+        titleCell2.appendChild(heading2);
+        row1.appendChild(titleCell2);
+
+        table.appendChild(row1);
+
+        Array.from(notes).forEach(element => {
+
+            let contentCell = document.createElement("TD");
+            let data = document.createTextNode(element.content);
+            contentCell.appendChild(data);
+
+            let likesCell = document.createElement("TD");
+            data = document.createTextNode(element.likes);
+            likesCell.appendChild(data);
+
+            let row = document.createElement("TR");
+            row.appendChild(contentCell);
+            row.appendChild(likesCell);
+
+            if(element.section == "leftOpenNote")
+            {
+                left.push(row);
+            }
+            else if(element.section == "midOpenNote")
+            {
+                mid.push(row);
+            }
+            else if(element.section == "rightOpenNote")
+            {
+                right.push(row);
+            }
+        });
+
+        Array.from(left).forEach(row => {
+            table.appendChild(row);
+        });
+
+        row1 = document.createElement("TR");
+
+        titleCell1 = document.createElement("TH");
+        heading1 = document.createTextNode("Section2");
+        titleCell1.appendChild(heading1);
+        row1.appendChild(titleCell1);
+
+        let titleCell2Mid = titleCell2.cloneNode(true);
+        row1.appendChild(titleCell2Mid);
+
+        tableMid.appendChild(row1);
+
+        Array.from(mid).forEach(row => {
+            tableMid.appendChild(row);
+        });
+
+        row1 = document.createElement("TR");
+
+        titleCell1 = document.createElement("TH");
+        heading1 = document.createTextNode("Section3");
+        titleCell1.appendChild(heading1);
+        row1.appendChild(titleCell1);
+
+        let titleCell2Right = titleCell2.cloneNode(true);
+        row1.appendChild(titleCell2Right);
+
+        tableRight.appendChild(row1);
+
+        Array.from(right).forEach(row => {
+            tableRight.appendChild(row);
+        });
+
+        if(id == "pdf")
+        {
+            PDF(table, tableMid, tableRight);
+        }
+        else if(id == "excel")
+        {
+            Excel(table, tableMid, tableRight);
+        }
+    }
+
+    function PDF(table, tableMid, tableRight)
+    {
+        let name = document.getElementById("name").cloneNode(true);
+
+        let pdf = document.createElement("div");
+        pdf.appendChild(name);
+        pdf.appendChild(table);
+        pdf.appendChild(document.createElement("br"));
+        pdf.appendChild(tableMid);
+        pdf.appendChild(document.createElement("br"));
+        pdf.appendChild(tableRight);
+
+        html2pdf(pdf);
+    }
+
+    function Excel(table, tableMid, tableRight)
+    {
+        let downloadLink;
+
+        Array.from(tableMid.rows).forEach(row => {
+            table.appendChild(row);
+        });
+
+        Array.from(tableRight.rows).forEach(row => {
+            table.appendChild(row);
+        });
+
+        let dataType = 'application/vnd.ms-excel';
+        let tableHTML = table.outerHTML.replace(/ /g, '%20');
+
+        let filename = 'excel_data.xls';
+
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+        downloadLink.download = filename;
+
+        downloadLink.click();
     }
 }
